@@ -5,3 +5,4 @@ dist/
 .vscode/
 data.json
 o-console.spec
+app.spec
