@@ -1,0 +1,7 @@
+__pycache__/
+ANOTHER_PROJECTS/
+build/
+dist/
+.vscode/
+data.json
+o-console.spec
