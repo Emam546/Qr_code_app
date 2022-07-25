@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from manage_students import SELECT_CLASS,SELECT_SECTION
 from typing import Dict, Iterable
-from _constents import ID,CLASSES
+from _constants import ID,CLASSES
 SELECTOPTION="Select Option"
 
 class SearchWidget(Frame):
@@ -12,8 +12,6 @@ class SearchWidget(Frame):
         # searchby=Label(self,text='Search By',font=('times new roman',20,'bold'),
         # fg='black',bg='white')
         # searchby.grid(row=0,column=0,padx=30)
-
-       
         # self.scombo=ttk.Combobox(self,values=self.searchby,font=('times new roman',18,'bold'))
         # self.scombo.grid(row=0,column=1,padx=1)
         # self.scombo.set(SELECTOPTION)
@@ -30,13 +28,13 @@ class SearchWidget(Frame):
         relief=GROOVE,bd=4,fg='black',bg='#7FFFD4')
         self.show_button.grid(row=0,column=4,padx=0)
         
-        self.seleectAllButton=Button(self,text='Select ALL',font=('times new roman',15,'bold'),
+        self.selectAllButton=Button(self,text='Select ALL',font=('times new roman',15,'bold'),
         relief=GROOVE,bd=4,fg='black',bg='#7FFFD4')
-        self.seleectAllButton.grid(row=0,column=5,padx=0)
+        self.selectAllButton.grid(row=0,column=5,padx=0)
         
-        self.seleectDEAllButton=Button(self,text='Deselect ALL',font=('times new roman',15,'bold'),
+        self.selectDEAllButton=Button(self,text='Deselect ALL',font=('times new roman',15,'bold'),
         relief=GROOVE,bd=4,fg='black',bg='#7FFFD4')
-        self.seleectDEAllButton.grid(row=0,column=6,padx=0)
+        self.selectDEAllButton.grid(row=0,column=6,padx=0)
         
         self.columnconfigure(7,weight=1)
         self.section_button=Button(self,text='Section',font=('times new roman',15,'bold'),
@@ -47,19 +45,18 @@ class SearchWidget(Frame):
         self.id_scannerbutton=Button(self,text='ID Scanner',font=('times new roman',15,'bold'),
         relief=GROOVE,bd=4,fg='black',bg='#7FFFD4')
         self.id_scannerbutton.grid(row=0,column=8,sticky="e")
-  
-         
+
 class THELISTBOX(Frame):
     def __init__(self,searchby:list,classes:Dict[str,list],keys:list,*args,**kwargs):
         super().__init__(relief=FLAT,bg='#B0C4DE',
-                         padx=7,pady=7,
+                        padx=7,pady=7,
                          *args,**kwargs)
         self.columnconfigure(0,weight=1)
         self.rowconfigure(2,weight=1)
         
-        self.serachWidget=SearchWidget(searchby,self,)
-        self.serachWidget.grid(row=0,column=0,sticky=NSEW)
-        self.searchby=self.serachWidget.searchby
+        self.searchWidget=SearchWidget(searchby,self,)
+        self.searchWidget.grid(row=0,column=0,sticky=NSEW)
+        self.searchby=self.searchWidget.searchby
         
         self.selectchoice=SELECT_CHOICE(classes,self)
         self.selectchoice.grid(row=1,column=0,sticky=NSEW,pady=10)
@@ -67,8 +64,8 @@ class THELISTBOX(Frame):
         self.listboxframe=LISTBOX_FRAME(keys,self)
         self.listboxframe.grid(row=2,column=0,sticky=NSEW)
 
-        self.serachWidget.seleectAllButton["command"]=lambda:self.listboxframe.selectAll(True)
-        self.serachWidget.seleectDEAllButton["command"]=lambda:self.listboxframe.selectAll(False)
+        self.searchWidget.selectAllButton["command"]=lambda:self.listboxframe.selectAll(True)
+        self.searchWidget.selectDEAllButton["command"]=lambda:self.listboxframe.selectAll(False)
         
 class SELECT_CHOICE(Frame):
     def __init__(self,classes:Dict[str,list],*args,**kwargs):
@@ -102,9 +99,9 @@ class SELECT_CHOICE(Frame):
     def _track_updating(self):
         pass 
     @property
-    def chioces(self):
+    def choices(self):
         return (self.class_combo.get() if self.class_combo.get()!=SELECT_CLASS else None),\
-         (self.section_combo.get() if self.section_combo.get()!=SELECT_SECTION else None)
+        (self.section_combo.get() if self.section_combo.get()!=SELECT_SECTION else None)
 class LISTBOX_FRAME(Frame):
     def __init__(self,KEYS:list,*args,**kwargs):
         super().__init__(relief=FLAT,bg='#B0C4DE',*args,**kwargs)
@@ -120,7 +117,7 @@ class LISTBOX_FRAME(Frame):
         for i,key in enumerate(KEYS,1):
             self.treview.heading(i, text=key)
             self.treview.column(i,anchor=CENTER)
-  
+
         self.treview.grid(row=0,column=0,sticky=NSEW)
         #self.treview.bind("<ButtonRelease-1>",self.click_insert)
         
@@ -133,7 +130,7 @@ class LISTBOX_FRAME(Frame):
         self.treview.bind('<<TreeviewSelect>>', lambda e:self.click_insert())
     def click_insert(self):
         pass
-          
+
         
     def tree(self,values:list):
         self.treview.delete(*self.treview.get_children())
@@ -152,13 +149,13 @@ class LISTBOX_FRAME(Frame):
             for item["values"][ID] in id:
                 self.treview.delete(item)
     
-    def delet_all(self):
+    def delete_all(self):
         self.treview.get_children(*self.treview.get_children())
 if __name__=="__main__":
     root=Tk()
     k=['ID_No','Email','Contact']
     classes={'First Year(CS)':[1,2,3,4],'Second Year(CS)':[1,2,3,4],
-                      'Third Year(CS)':['First Year(IT)','Second Year(IT)','Third Year(IT)']}
+                    'Third Year(CS)':['First Year(IT)','Second Year(IT)','Third Year(IT)']}
     listbox=THELISTBOX(k,classes,k)
     listbox.pack()
     

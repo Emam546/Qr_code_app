@@ -2,7 +2,7 @@ import webbrowser
 import os
 import barcode
 from bs4 import BeautifulSoup
-from _constents import *
+from _constants import *
 from typing import List,Tuple
 FILE_NAME="index.html"
 FILE_NAME=os.path.join(os.path.dirname(__file__),FILE_NAME)

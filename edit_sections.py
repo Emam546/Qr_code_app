@@ -22,7 +22,7 @@ class UpdateName(Frame):
         relief=GROOVE,bd=4,fg='black',bg='#7FFFD4',command=lambda:self.check_entry())
         self.search_button.grid(row=0,column=3,sticky="nse")
     def check_entry(self):
-        class_,section=self.select_option.chioces
+        class_,section=self.select_option.choices
         if not class_:
             messagebox.showerror("ERROR","Select a Class")
             return False
@@ -32,7 +32,7 @@ class UpdateName(Frame):
         if not len(self.sentry.get().replace(" ","")):
             messagebox.showerror("ERROR","Name are required")
             return False
-        return list(self.select_option.chioces)+[self.sentry.get()]
+        return list(self.select_option.choices)+[self.sentry.get()]
     def update_classes(self,classes):
         self.select_option.update_classes(classes)
     def clear(self):
@@ -84,7 +84,7 @@ class EDIT_SECTIONLEVEL(Toplevel):
         self.update_name.pack(fill=X)
 
 if __name__=="__main__":
-    from _constents import CLASSES
+    from _constants import CLASSES
     root=Tk()
     NewName().pack(fill=BOTH,expand=YES)
     root.mainloop()

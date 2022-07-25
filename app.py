@@ -9,7 +9,7 @@ import pandas as pd
 from tkinter import messagebox
 import os
 import difflib
-from _constents import *
+from _constants import *
 from qr_coder import ides,CODE
 import random
 from id_scanners import IdScaaner
@@ -44,7 +44,7 @@ class Mainapp(Tk):
         self.bigcontainer.rowconfigure(1,weight=1)
         
         self.heading_label=Label(self.bigcontainer,text='Student Management System'
-       ,fg='black',bg='#DC143C',font=('times new roman',35,'bold'))
+        ,fg='black',bg='#DC143C',font=('times new roman',35,'bold'))
         self.heading_label.grid(row=0,column=0,sticky=NSEW)
         self.container=ttk.Panedwindow(self.bigcontainer,)
         self.container.grid(row=1,column=0,sticky=NSEW)
@@ -54,19 +54,19 @@ class Mainapp(Tk):
         self.manageStudents=ManageStudents(classes,self.container)
         
         bottom=Label(self.bigcontainer,text='Created by Emam Ashour to contact 01091907365'
-       ,fg='black',bg='#DC143C',font=('times new roman',10,'bold'),anchor="w")
+        ,fg='black',bg='#DC143C',font=('times new roman',10,'bold'),anchor="w")
         bottom.grid(row=3,column=0,sticky=NSEW)
         
         self.manageStudents.add_student=self.add_new_student
         self.manageStudents.delet_stud=self.delet_stud
         self.manageStudents.update_stud=self.update_stud
         self.manageStudents.generate_code=self.generate_codes
-        self.listBox.serachWidget.search_button["command"]=self._search_in
-        self.listBox.serachWidget.show_button["command"]=self.showAll
+        self.listBox.searchWidget.search_button["command"]=self._search_in
+        self.listBox.searchWidget.show_button["command"]=self.showAll
         self.listBox.listboxframe.click_insert=self.showInfo
         self.listBox.selectchoice._track_updating=self.showAll
-        self.listBox.serachWidget.section_button["command"]=self.pop_section_up
-        self.listBox.serachWidget.id_scannerbutton["command"]=self.pop_idscanner
+        self.listBox.searchWidget.section_button["command"]=self.pop_section_up
+        self.listBox.searchWidget.id_scannerbutton["command"]=self.pop_idscanner
         
         #self.manageStudents.grid(row=2,column=0,sticky=NSEW)
         self.container.add(self.listBox)
@@ -83,8 +83,8 @@ class Mainapp(Tk):
             open(DATAFILENAME,"w")
         self.DB.to_json(DATAFILENAME,orient="records")
     def _search_in(self):
-        searchvalue=self.listBox.serachWidget.sentry.get()
-        class_,section=self.listBox.selectchoice.chioces
+        searchvalue=self.listBox.searchWidget.sentry.get()
+        class_,section=self.listBox.selectchoice.choices
         thelist=self.DB
         if class_:
             thelist=self.DB[self.DB[CLASS]==class_]
@@ -95,7 +95,7 @@ class Mainapp(Tk):
             self.DB[self.DB[NAME].isin(mathces)].to_dict(orient="records")
             )
     def showAll(self):
-        class_,section=self.listBox.selectchoice.chioces
+        class_,section=self.listBox.selectchoice.choices
         thelist=self.DB
         if class_:
             thelist=self.DB[self.DB[CLASS]==class_]
@@ -103,7 +103,6 @@ class Mainapp(Tk):
                 thelist=thelist[thelist[SECTION]==section]
         self.tree(thelist.to_dict(orient="records"))
     def tree(self,values):
-     
         values=[list(val.values()) for val in values]
         self.listBox.listboxframe.tree(values)
     def add_new_student(self):

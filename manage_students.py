@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from typing import List,Dict
-from _constents import *
+from _constants import *
 PAD_XCOLUMN1=9
 PADY_BOTTOM=10
 
