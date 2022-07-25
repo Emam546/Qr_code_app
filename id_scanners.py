@@ -1,6 +1,4 @@
-
 from tkinter  import *
-from tkinter import messagebox
 def _vaildiation_digits_number(input):
     if input.isnumeric() or input == "":return True                  
     else:return False

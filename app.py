@@ -1,7 +1,6 @@
 from email import message
 from tkinter import *
 from tkinter import ttk
-from tokenize import Name
 from edit_sections import EDIT_SECTIONLEVEL
 from manage_students import *
 from listbox import *

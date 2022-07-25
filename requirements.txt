@@ -1,0 +1,6 @@
+python-barcode
+pandas
+beautifulsoup4
+playsound
+tkinter
+cdifflib
