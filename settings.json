@@ -1,0 +1,9 @@
+{
+    "BARCODE_TYPE": "ean",
+    "NUMOFREPEAT": 5,
+    "CLASSES": [
+        "Frist Class",
+        "Second Class",
+        "Third CLASS"
+    ]
+}
